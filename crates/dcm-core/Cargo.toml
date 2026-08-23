@@ -1,0 +1,12 @@
+[package]
+name = "dcm-core"
+description = "Shared primitives for dcm2niix-rs: errors, exit codes, 4x4 geometry"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }

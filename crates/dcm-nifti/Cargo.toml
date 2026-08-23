@@ -1,0 +1,15 @@
+[package]
+name = "dcm-nifti"
+description = "NIfTI-1 writer for dcm2niix-rs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+dcm-core = { workspace = true }
+flate2 = { workspace = true }
+zstd = "0.13"
+rayon = "1.10"

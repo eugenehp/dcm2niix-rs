@@ -1,0 +1,16 @@
+[package]
+name = "dcm-parity"
+description = "Regression harness: run dcm_qa corpora against dcm2niix-rs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+
+[[bin]]
+name = "dcm-parity"
+path = "src/main.rs"

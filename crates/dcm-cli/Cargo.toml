@@ -1,0 +1,32 @@
+[package]
+name = "dcm-cli"
+description = "dcm2niix CLI — Rust/rlx DICOM→NIfTI (optional ffi / gpu features)"
+
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+dcm-convert = { workspace = true }
+dcm-core = { workspace = true }
+dcm-sys = { workspace = true, optional = true, features = ["jpegls", "openjpeg"] }
+
+[features]
+default = []
+# Optional upstream C++ reference binary (`dcm2niix-ffi`) for differential parity checks.
+# The product binary is always Rust/rlx.
+ffi = ["dep:dcm-sys"]
+# Optional wgpu realize for large volume flips (rlx `Device::Gpu`).
+gpu = ["dcm-convert/gpu"]
+
+[[bin]]
+name = "dcm2niix"
+path = "src/bin/dcm2niix.rs"
+
+[[bin]]
+name = "dcm2niix-ffi"
+path = "src/bin/dcm2niix_ffi.rs"
+required-features = ["ffi"]

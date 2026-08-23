@@ -1,0 +1,61 @@
+name: parity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'crates/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/parity.yml'
+  pull_request:
+    paths:
+      - 'crates/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/parity.yml'
+
+jobs:
+  dcm-qa:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dcm2niix-rs
+    steps:
+      - name: Checkout dcm2niix-rs
+        uses: actions/checkout@v4
+        with:
+          path: dcm2niix-rs
+
+      - name: Checkout rlx (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: MIT-RLX/rlx
+          path: rlx
+          ref: main
+
+      - name: Checkout regression corpora
+        working-directory: .
+        run: |
+          for repo in dcm_qa dcm_qa_nih dcm_qa_uih; do
+            git clone --depth 1 "https://github.com/neurolabusc/${repo}.git" "${repo}"
+          done
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: dcm2niix-rs -> target
+
+      - name: Build Rust dcm2niix + parity harness
+        run: cargo build --release -p dcm-cli -p dcm-parity
+
+      - name: Run dcm_qa corpora
+        run: |
+          ./target/release/dcm-parity \
+            --dcm2niix ./target/release/dcm2niix \
+            --corpus ../dcm_qa \
+            --corpus ../dcm_qa_nih \
+            --corpus ../dcm_qa_uih

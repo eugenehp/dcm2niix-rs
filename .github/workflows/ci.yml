@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-test:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dcm2niix-rs
+    steps:
+      - name: Checkout dcm2niix-rs
+        uses: actions/checkout@v4
+        with:
+          path: dcm2niix-rs
+
+      - name: Checkout rlx (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: MIT-RLX/rlx
+          path: rlx
+          # Pin loosely; Cargo.toml requires rlx-tensor 0.2.15 API.
+          # Use a recent tag/branch that still exposes that crate version.
+          ref: main
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: dcm2niix-rs -> target
+
+      - name: Build
+        run: cargo build --release -p dcm-cli -p dcm-parity
+
+      - name: Unit tests
+        run: cargo test --workspace --exclude dcm-sys
+
+      - name: CLI smoke
+        run: |
+          ./target/release/dcm2niix --version
+          ./target/release/dcm2niix -h >/dev/null

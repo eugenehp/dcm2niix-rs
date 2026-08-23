@@ -1,0 +1,49 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dcm2niix-rs
+    steps:
+      - name: Checkout dcm2niix-rs
+        uses: actions/checkout@v4
+        with:
+          path: dcm2niix-rs
+
+      - name: Checkout rlx (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: MIT-RLX/rlx
+          path: rlx
+          ref: main
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: dcm2niix-rs -> target
+
+      - name: Build release binary
+        run: cargo build --release -p dcm-cli
+
+      - name: Smoke
+        run: |
+          ./target/release/dcm2niix --version
+          ./target/release/dcm2niix -h >/dev/null
+
+      - name: Upload macOS binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: dcm2niix-macos-${{ github.ref_name }}
+          path: dcm2niix-rs/target/release/dcm2niix

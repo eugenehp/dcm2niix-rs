@@ -1,0 +1,54 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/dcm-core",
+    "crates/dcm-sys",
+    "crates/dcm-dicom",
+    "crates/dcm-nifti",
+    "crates/dcm-bids",
+    "crates/dcm-convert",
+    "crates/dcm-parity",
+    "crates/dcm-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "BSD-2-Clause"
+repository = "https://github.com/rordenlab/dcm2niix"
+authors = ["dcm2niix-rs contributors"]
+description = "Pure-Rust dcm2niix: DICOM to NIfTI conversion"
+readme = "README.md"
+
+[workspace.dependencies]
+dcm-core = { path = "crates/dcm-core", version = "0.1.0" }
+dcm-sys = { path = "crates/dcm-sys", version = "0.1.0" }
+dcm-dicom = { path = "crates/dcm-dicom", version = "0.1.0" }
+dcm-nifti = { path = "crates/dcm-nifti", version = "0.1.0" }
+dcm-bids = { path = "crates/dcm-bids", version = "0.1.0" }
+dcm-convert = { path = "crates/dcm-convert", version = "0.1.0" }
+
+thiserror = "2"
+anyhow = "1"
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+crc32fast = "1"
+
+# Same DICOM stack as freesurfer-rs: container + native pixel decode.
+dicom-object = "0.10"
+dicom-core = "0.10"
+dicom-dictionary-std = "0.10"
+dicom-pixeldata = { version = "0.10", default-features = false, features = ["native", "charls", "openjp2", "rayon"] }
+
+# Voxel graphs compile through rlx (same sibling checkout as freesurfer-rs).
+# Default: CPU eval. Enable `dcm-convert`/`dcm-cli` feature `gpu` for wgpu.
+rlx-tensor = { path = "../rlx/crates/core/rlx-tensor", version = "0.2.15", features = ["eval"], default-features = false }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+
+[profile.test]
+opt-level = 2

@@ -1,0 +1,26 @@
+/target/
+**/*.rs.bk
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Local bench / parity scratch
+/Out/
+/tmp/
+*.jnii
+*.bnii
+*.nrrd
+*.nhdr
+*.mgh
+*.mgz
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Coverage / profiling
+*.profraw
+*.profdata
+/coverage/

@@ -1,0 +1,27 @@
+[package]
+name = "dcm-convert"
+description = "DICOM→NIfTI conversion pipeline (geometry, BIDS, ReproIn, rlx voxel ops)"
+
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+dcm-core = { workspace = true }
+dcm-dicom = { workspace = true }
+dcm-nifti = { workspace = true }
+dcm-bids = { workspace = true }
+rlx-tensor = { workspace = true }
+flate2 = { workspace = true }
+crc32fast = { workspace = true }
+serde_json = { workspace = true }
+rayon = "1.10"
+
+[features]
+default = []
+# Realize large voxel graphs on wgpu via rlx (`Device::Gpu`).
+# Override with `DCM2NIIX_RLX_DEVICE=cpu|gpu|auto`.
+gpu = ["rlx-tensor/eval-gpu"]
