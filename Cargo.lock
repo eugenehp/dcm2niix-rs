@@ -540,7 +540,6 @@ version = "0.1.0"
 dependencies = [
  "dcm-convert",
  "dcm-core",
- "dcm-sys",
 ]
 
 [[package]]
@@ -2222,17 +2221,20 @@ checksum = "47b34b781b31e5d73e9fbc8689c70551fd1ade9a19e3e28cfec8580a79290cc4"
 
 [[package]]
 name = "rlx-autodiff"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1d4e0a92acdaaba1feb89b2b86ce03fc689b58f3e03215544d3c2a8fbb310a5"
 dependencies = [
  "half",
  "rlx-fusion",
  "rlx-ir",
- "thiserror 2.0.20",
 ]
 
 [[package]]
 name = "rlx-compile"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4a62593b4e69c835d546918cb9984d52994cf726a681444a7578da6d1c4fb767"
 dependencies = [
  "rlx-autodiff",
  "rlx-fusion",
@@ -2241,7 +2243,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-cpu"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "966c3a44a300e4fa71411a3cde2ee3397497a31310ff9ab6cf3182d106a54b55"
 dependencies = [
  "half",
  "rayon",
@@ -2254,7 +2258,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-dduf"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eb12454d61847d66f79f46388682e15c5826eabd8eacf4099fde7bd59c1cc696"
 dependencies = [
  "anyhow",
  "half",
@@ -2265,7 +2271,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-driver"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fa69ae21657f800c4c97afe6d00c234e431d219a6aa07594495a4d7e5e21851c"
 dependencies = [
  "half",
  "rlx-ir",
@@ -2273,14 +2281,18 @@ dependencies = [
 
 [[package]]
 name = "rlx-fusion"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f2b515ee59817692fc8545e860edb38531b44b6cb463e15135c87eee12ebb8a"
 dependencies = [
  "rlx-ir",
 ]
 
 [[package]]
 name = "rlx-gguf"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5d009c57d4f3f5e70999a0cccfb86c05cf3ec81fba573f401c04aed089b44867"
 dependencies = [
  "anyhow",
  "bytemuck",
@@ -2291,12 +2303,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "rlx-gpu-dispatch"
-version = "0.2.15"
-
-[[package]]
 name = "rlx-gpu-host"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "194832bec915609436429f458010d020bc985817a1e5f1e6b91a92a895f8fe29"
 dependencies = [
  "bytemuck",
  "half",
@@ -2308,7 +2318,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-ir"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5632191fde59e4c1e42c59702c048b5ffa9323602b953d784bb0633aad8b4468"
 dependencies = [
  "aes 0.9.2",
  "bincode",
@@ -2319,7 +2331,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-macros"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88c030869b035bfd12ebc2cff103fe1f33e9fdfa542db8c21a0f792211c96252"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2328,7 +2342,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-mlx-io"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c05d3590a76bc7d1046414b0daf8e43bffc4bf2646ff40705661b5c6e2af518"
 dependencies = [
  "anyhow",
  "half",
@@ -2344,7 +2360,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-nemo"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f81b2a2c20008f2520388da9e991d9aeab46b1d18b0b65469c84b0264dbb337"
 dependencies = [
  "anyhow",
  "flate2",
@@ -2355,7 +2373,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-opt"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6459bb134a75eaf2dccd060b44c271814e2fbd9f88a7f1aecc96f504f0d66ca5"
 dependencies = [
  "rlx-autodiff",
  "rlx-compile",
@@ -2365,7 +2385,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-pkg"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "326b021c8f589241d68922942848aacfb7da4c70418af6b41aae59f63400eef2"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2386,7 +2408,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-runtime"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "605bf36633160774fdaa3af2be32606d2d544a4b45ff424f636e87eeb6d50c24"
 dependencies = [
  "anyhow",
  "half",
@@ -2397,7 +2421,6 @@ dependencies = [
  "rlx-dduf",
  "rlx-driver",
  "rlx-gguf",
- "rlx-gpu-dispatch",
  "rlx-ir",
  "rlx-macros",
  "rlx-mlx-io",
@@ -2410,7 +2433,9 @@ dependencies = [
 
 [[package]]
 name = "rlx-tensor"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93008f459fd00abc01e9ec483c9d8360892c4f78a54871f915ffcce54f8f650a"
 dependencies = [
  "rlx-ir",
  "rlx-runtime",
@@ -2418,14 +2443,18 @@ dependencies = [
 
 [[package]]
 name = "rlx-unfuse"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6565186565a1edae9cfe412a929c252794d299d8b2c9818ad4974738e80191ec"
 dependencies = [
  "rlx-ir",
 ]
 
 [[package]]
 name = "rlx-wgpu"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "655e8a06d06060d1847e2d95b7c6cd039fe451a5224db3ddb4352854b2ab5bc0"
 dependencies = [
  "bytemuck",
  "half",
@@ -2433,7 +2462,6 @@ dependencies = [
  "rlx-compile",
  "rlx-cpu",
  "rlx-gguf",
- "rlx-gpu-dispatch",
  "rlx-gpu-host",
  "rlx-ir",
  "rlx-opt",
@@ -2446,7 +2474,9 @@ dependencies = [
 
 [[package]]
 name = "rlxsl"
-version = "0.2.15"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dd7597ee63032a5967e9ba83e50bd18185eed525eb1c6b04738ca1bfc83446dc"
 dependencies = [
  "rlx-ir",
 ]

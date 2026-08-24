@@ -187,7 +187,7 @@ pub fn read_par_rec(
         * max_mixes) as usize;
 
     let c0 = &rows[0].cols;
-    let (nx, ny, bits, mut dx, mut dy, mut dz, mut ang_ap, mut ang_fh, mut ang_rl, mut pos_ap, mut pos_fh, mut pos_rl, mut slice_orient, mut te, mut ri, mut rs, mut ss) =
+    let (nx, ny, bits, mut dx, mut dy, mut dz, mut ang_ap, mut ang_fh, mut ang_rl, pos_ap, pos_fh, pos_rl, mut slice_orient, mut te, mut ri, mut rs, mut ss) =
         if par_vers < 40 {
             (
                 v3_xdim,
@@ -361,7 +361,7 @@ pub fn read_par_rec(
 
         let mut is_magnitude = (image_type - 0.0).abs() < 1e-6;
         let mut is_real = (image_type - 1.0).abs() < 1e-6;
-        let mut is_imaginary = (image_type - 2.0).abs() < 1e-6;
+        let is_imaginary = (image_type - 2.0).abs() < 1e-6;
         let mut is_phase = (image_type - 3.0).abs() < 1e-6;
         if (image_type - 18.0).abs() < 1e-6 {
             is_real = true;

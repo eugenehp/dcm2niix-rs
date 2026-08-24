@@ -33,7 +33,7 @@ pub fn compute_gantry_tilt_precise(d1: &DicomImage, d2: &DicomImage, verbose: i3
     slice_vector = make_positive(slice_vector);
     let read = [d1.orient[1], d1.orient[2], d1.orient[3]];
     let phase = [d1.orient[4], d1.orient[5], d1.orient[6]];
-    let mut slice90 = make_positive(cross(read, phase));
+    let slice90 = make_positive(cross(read, phase));
     let len90 = norm(slice90);
     if len90.abs() < 1e-12 {
         return ret;
@@ -171,7 +171,7 @@ fn correct_tilt_i16(
     let ny = hdr_out.dim[2] as usize;
     let n_out = nx * ny;
     let has_pad = !d.pixel_padding_value.is_nan();
-    let mut pad = if has_pad {
+    let pad = if has_pad {
         d.pixel_padding_value.round() as i16
     } else {
         let mut mn = i16::MAX;
@@ -199,7 +199,7 @@ fn correct_tilt_i16(
         for r in 0..ny {
             let r_i = r as f64 - offset;
             if r_i >= 0.0 && r_i < ny_in as f64 {
-                let mut r_lo = r_i.floor() as usize;
+                let r_lo = r_i.floor() as usize;
                 let mut r_hi = r_lo + 1;
                 if r_hi >= ny_in {
                     r_hi = r_lo;
@@ -289,7 +289,7 @@ fn correct_tilt_f32(
         for r in 0..ny {
             let r_i = r as f64 - offset;
             if r_i >= 0.0 && r_i < ny_in as f64 {
-                let mut r_lo = r_i.floor() as usize;
+                let r_lo = r_i.floor() as usize;
                 let mut r_hi = r_lo + 1;
                 if r_hi >= ny_in {
                     r_hi = r_lo;

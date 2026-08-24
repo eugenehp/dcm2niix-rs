@@ -2,7 +2,7 @@
 
 Pure-Rust rewrite of [dcm2niix](https://github.com/rordenlab/dcm2niix): DICOM → NIfTI (+ BIDS sidecars).
 
-The product converter is always Rust (`dcm-dicom` / `dcm-convert`). Voxel reorders use sibling [rlx](../rlx) (`rlx-tensor`); an optional `gpu` feature can realize large graphs on **wgpu**. Upstream C++ is available only as `dcm2niix-ffi` for differential checks.
+The product converter is always Rust (`dcm-dicom` / `dcm-convert`). Voxel reorders use [rlx-tensor](https://crates.io/crates/rlx-tensor) from crates.io; an optional `gpu` feature can realize large graphs on **wgpu**. Upstream C++ is available only as `dcm2niix-ffi` for differential checks.
 
 Broader BIDS dataset tooling lives in sibling [`bids-rs`](../bids-rs). This repo emits conversion sidecars (including BidsGuess / ReproIn); extend dataset-level coverage there.
 
@@ -11,7 +11,7 @@ Broader BIDS dataset tooling lives in sibling [`bids-rs`](../bids-rs). This repo
 ## Quick start
 
 ```bash
-# Requires a sibling ../rlx checkout (rlx-tensor path dependency).
+# rlx-tensor comes from crates.io (0.2.14). Optional ../rlx dev: uncomment [patch.crates-io] in Cargo.toml.
 cargo build --release -p dcm-cli
 ./target/release/dcm2niix -h
 ./target/release/dcm2niix -b y -z n -f %p_%s -o /tmp/out /path/to/dicoms
@@ -23,12 +23,11 @@ cargo build --release -p dcm-cli
 | --- | --- | --- |
 | *(default)* | `dcm-cli` | Pure Rust converter |
 | `gpu` | `dcm-cli` / `dcm-convert` | Optional wgpu realize for large volume flips (`Device::Gpu`) |
-| `ffi` | `dcm-cli` | Build `dcm2niix-ffi` (embedded upstream C++ reference) |
+
+C++ parity reference (workspace only, not on crates.io): `cargo build --release -p dcm-sys` → `dcm2niix-ffi`.
 
 ```bash
 cargo build --release -p dcm-cli --features gpu
-cargo build --release -p dcm-cli --features ffi
-./target/release/dcm2niix-ffi --version
 ```
 
 Environment (voxel backend):
@@ -88,7 +87,7 @@ On QA-sized data, default CPU + direct flips outperform the wgpu build (transfer
 
 | Crate | Role |
 | --- | --- |
-| `dcm-cli` | `dcm2niix` binary (+ optional `dcm2niix-ffi`) |
+| `dcm-cli` | `dcm2niix` binary (`dcm-sys` builds optional `dcm2niix-ffi` locally) |
 | `dcm-convert` | Scan → group → assemble → write; ReproIn, physio, PAR/REC, rlx flips / ortho |
 | `dcm-dicom` | Headers, CSA/UIH, enhanced FG, pixel decode |
 | `dcm-nifti` | NIfTI-1 (+ gzip / zstd) writer |
@@ -106,7 +105,7 @@ On QA-sized data, default CPU + direct flips outperform the wgpu build (transfer
 
 ## Continuous integration
 
-- **`ci.yml`** — build + unit tests (checks out sibling [MIT-RLX/rlx](https://github.com/MIT-RLX/rlx))
+- **`ci.yml`** — build + unit tests on every push/PR
 - **`parity.yml`** — full `dcm_qa*` gate vs neurolabusc corpora
 
 ```bash

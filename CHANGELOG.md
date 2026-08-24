@@ -56,6 +56,7 @@ First public release of the pure-Rust `dcm2niix` port. CLI-compatible conversion
 
 ### Changed
 - Default voxel flips use a tight in-place CPU path (rlx/wgpu reserved for large volumes)
+- `rlx-tensor` from crates.io `0.2.14` (publishable; was path-only `0.2.15`)
 - Ortho reorient (`nii_setOrtho`) uses the same rlx flip+transpose path (CPU gather below ~8 MiB)
 - Faster flips (whole-row / whole-slice `swap_with_slice`); parallel mosaic demosaic, slice pack, and 4D ortho
 - MRS `VOI` uses full-precision IOP (`voi_orient`) instead of `snap_f32` sform orientation

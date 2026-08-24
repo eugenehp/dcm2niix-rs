@@ -137,7 +137,7 @@ pub fn read_ecat7(path: &Path) -> Result<(DicomImage, Nifti1Header, Vec<u8>)> {
     let mut offsets: Vec<u64> = Vec::new();
     let mut slopes: Vec<f32> = Vec::new();
     let mut list = lvals;
-    let mut list_off = 512u64;
+    let mut list_off;
     loop {
         if list[0] + list[3] != 31 {
             break;

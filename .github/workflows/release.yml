@@ -20,13 +20,6 @@ jobs:
         with:
           path: dcm2niix-rs
 
-      - name: Checkout rlx (path dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: MIT-RLX/rlx
-          path: rlx
-          ref: main
-
       - uses: dtolnay/rust-toolchain@stable
 
       - name: Cache cargo

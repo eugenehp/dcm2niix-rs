@@ -170,7 +170,7 @@ fn link_cpp_runtime() {
 }
 
 fn link_platform() {
-    // Stack size for the final `dcm2niix` binary is set in dcm-cli/build.rs
-    // (`cargo:rustc-link-arg-bin`); link args from this rlib do not reach bins.
-    let _ = env::var("CARGO_CFG_TARGET_OS");
+    if env::var("CARGO_CFG_TARGET_OS").unwrap() == "macos" {
+        println!("cargo:rustc-link-arg-bin=dcm2niix-ffi=-Wl,-stack_size,0x1000000");
+    }
 }

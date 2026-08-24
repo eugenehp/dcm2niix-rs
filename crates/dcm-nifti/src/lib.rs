@@ -235,14 +235,6 @@ fn write_header_and_data_ext<W: Write>(
     Ok(())
 }
 
-fn write_header_and_data<W: Write>(w: W, hdr: &Nifti1Header, voxels: &[u8]) -> Result<()> {
-    write_header_and_data_ext(w, hdr, voxels, None)
-}
-
-fn write_nii_raw(path: &Path, hdr: &Nifti1Header, voxels: &[u8]) -> Result<()> {
-    write_nii_raw_with_ext(path, hdr, voxels, None)
-}
-
 fn write_nii_raw_with_ext(
     path: &Path,
     hdr: &Nifti1Header,

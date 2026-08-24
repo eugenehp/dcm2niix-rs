@@ -1,6 +1,7 @@
 [package]
 name = "dcm-sys"
 description = "Upstream dcm2niix C++ core — parity reference only (not the product path)"
+publish = false
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -19,3 +20,7 @@ cc = "1"
 
 [dependencies]
 libc = "0.2"
+
+[[bin]]
+name = "dcm2niix-ffi"
+path = "src/bin/dcm2niix_ffi.rs"

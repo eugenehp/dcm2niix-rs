@@ -130,7 +130,7 @@ dcm-parity — dcm_qa* regression runner for the Rust/rlx `dcm2niix` binary
     cargo build --release -p dcm-cli -p dcm-parity
 
   Optional C++ reference (differential only):
-    cargo build --release -p dcm-cli --features ffi
+    cargo build --release -p dcm-sys
 
   --all              run dcm_qa, dcm_qa_nih, dcm_qa_uih (default when present)
   --corpus DIR       add a corpus (repeatable)

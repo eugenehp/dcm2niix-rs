@@ -4,7 +4,8 @@
 //!
 //! - **default** — pure Rust conversion path
 //! - **`gpu`** — optional wgpu realize for large volume flips
-//! - **`ffi`** — also builds `dcm2niix-ffi` (upstream C++ parity reference)
+//!
+//! Upstream C++ parity reference: build `dcm2niix-ffi` from the `dcm-sys` crate.
 //!
 //! Broader BIDS dataset tooling lives in sibling `bids-rs`.
 

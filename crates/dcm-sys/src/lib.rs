@@ -1,8 +1,7 @@
 //! Upstream dcm2niix C++ core (`../dcm2niix/console`) as a static library.
 //!
 //! **Parity reference only.** Product conversion is Rust/rlx (`dcm-convert`).
-//! Enable via `dcm-cli`'s `ffi` feature to build the `dcm2niix-ffi` binary for
-//! differential checks against this implementation.
+//! Build `cargo build -p dcm-sys` for the `dcm2niix-ffi` binary (differential checks).
 
 use std::ffi::CString;
 use std::os::raw::{c_char, c_int};

@@ -1016,7 +1016,7 @@ pub fn parse_header(path: &Path, obj: &DefaultDicomObject) -> Result<DicomImage>
     let manufacturer_name = text(obj, tags::MANUFACTURER);
     let image_type = text(obj, tags::IMAGE_TYPE);
     let series_description = text(obj, tags::SERIES_DESCRIPTION);
-    let mut is_derived = image_type.to_ascii_uppercase().contains("DERIVED");
+    let is_derived = image_type.to_ascii_uppercase().contains("DERIVED");
     let is_localizer = series_description.to_ascii_uppercase().contains("LOCALIZER")
         || image_type.to_ascii_uppercase().contains("LOCALIZER");
     let is_mosaic = image_type.to_ascii_uppercase().contains("MOSAIC");

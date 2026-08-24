@@ -10,10 +10,11 @@
 
 ## Pre-release gate
 
-Requires sibling checkouts:
+Requires sibling checkouts (parity only):
 
-- `../rlx` — `rlx-tensor` path dependency
 - `../dcm_qa`, `../dcm_qa_nih`, `../dcm_qa_uih` — parity corpora (optional locally; CI clones them)
+
+`rlx-tensor` is pulled from **crates.io** (`0.2.14`). Optional `../rlx` dev: uncomment `[patch.crates-io]` in root `Cargo.toml`.
 
 ```bash
 cargo test --workspace --exclude dcm-sys
@@ -28,7 +29,7 @@ Optional smoke:
 
 ```bash
 cargo build --release -p dcm-cli --features gpu
-cargo build --release -p dcm-cli --features ffi   # needs ../dcm2niix for dcm-sys
+cargo build --release -p dcm-sys   # needs ../dcm2niix for C++ reference binary
 ```
 
 ## Tag and GitHub release
@@ -39,6 +40,25 @@ git push origin v0.1.0
 ```
 
 Attach release notes from `CHANGELOG.md` `[0.1.0]` section.
+
+## Publish to crates.io
+
+Publish **in dependency order** (each crate must exist on crates.io before dependents):
+
+```bash
+cargo publish -p dcm-core
+cargo publish -p dcm-dicom
+cargo publish -p dcm-nifti
+cargo publish -p dcm-bids
+cargo publish -p dcm-convert
+cargo publish -p dcm-cli
+```
+
+`dcm-sys` and `dcm-parity` are `publish = false`.
+
+`dcm-convert` depends on `rlx-tensor` **0.2.14** from crates.io (not the unpublished 0.2.15 path-only sibling).
+
+Use `--allow-dirty` only while iterating locally; commit before the real publish.
 
 ## Build artifacts (local)
 

@@ -42,9 +42,8 @@ dicom-core = "0.10"
 dicom-dictionary-std = "0.10"
 dicom-pixeldata = { version = "0.10", default-features = false, features = ["native", "charls", "openjp2", "rayon"] }
 
-# Voxel graphs compile through rlx (same sibling checkout as freesurfer-rs).
-# Default: CPU eval. Enable `dcm-convert`/`dcm-cli` feature `gpu` for wgpu.
-rlx-tensor = { path = "../rlx/crates/core/rlx-tensor", version = "0.2.15", features = ["eval"], default-features = false }
+# Voxel graphs compile through rlx (crates.io). Local ../rlx dev: see `[patch.crates-io]` below.
+rlx-tensor = { version = "0.2.14", features = ["eval"], default-features = false }
 
 [profile.release]
 opt-level = 3
@@ -52,3 +51,7 @@ lto = "thin"
 
 [profile.test]
 opt-level = 2
+
+# Optional: uncomment to develop against a sibling ../rlx checkout (not used by `cargo publish`).
+# [patch.crates-io]
+# rlx-tensor = { path = "../rlx/crates/core/rlx-tensor" }

@@ -455,8 +455,7 @@ fn set_bids_ge(d: &mut DicomImage, n_convert: usize) {
     let mut is_dir = false;
     let mut is_add_run = true;
     let mut is_part = false;
-    let mut modality = String::new();
-    let mut dtype = String::new();
+    let (modality, dtype): (String, String);
 
     if (d.rows < 2 && n_convert < 4) || d.is_localizer || contains_ci(desc, "3 Plane Loc") {
         dtype = "discard".into();

@@ -1,6 +1,7 @@
 [package]
 name = "dcm-parity"
 description = "Regression harness: run dcm_qa corpora against dcm2niix-rs"
+publish = false
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true

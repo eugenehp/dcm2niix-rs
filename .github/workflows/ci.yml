@@ -20,15 +20,6 @@ jobs:
         with:
           path: dcm2niix-rs
 
-      - name: Checkout rlx (path dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: MIT-RLX/rlx
-          path: rlx
-          # Pin loosely; Cargo.toml requires rlx-tensor 0.2.15 API.
-          # Use a recent tag/branch that still exposes that crate version.
-          ref: main
-
       - uses: dtolnay/rust-toolchain@stable
 
       - name: Cache cargo
